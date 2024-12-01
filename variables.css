@@ -1,0 +1,27 @@
+:root {
+    /* Färger */
+    --cloud-color: #ffffff;
+    --heading-color:0;
+    --background-color: #87CEFA;
+    --text-color: #333; 
+
+    /* Typsnitt */
+    --font-family: 'Luminari', serif;
+    --font-size-heading: 24px;
+    --font-size-text: 16px;
+
+    /* Marginaler och padding */
+    --padding: 30px;
+    --margin: 20px;
+
+    /* Gränser */
+    --border-radius: 20px;
+    --border-width: 2px;
+
+    /* Skuggor */
+    --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    --button-hover-color: #3D7AB7; /* Mörkare blå vid hovring */
+
+    /* Opacitet */
+    --cloud-opacity: 0.8;
+}
