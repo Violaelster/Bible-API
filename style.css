@@ -7,176 +7,43 @@ html {
 }
 
 body {
-    margin: 0;
-    padding: 20px;
-    background-color: var(--background-color);
-    overflow:hidden;
+    width: 100cqw;
+    min-height: 100cqh;
+    display: flex;
+    place-content: center;
+    place-items: flex-start center;
+    background: var(--bg);
     cursor: url('SVG/cross.svg') 16 16, auto;
-}
-
-h1 {
-    color: #4A90E2;
-    font-size: 5rem;
-}
+  }
 
 .generator {
     z-index:1;
-    position: relative;
-}
-
-.cloud-container {
-    max-width: 400px;
-    margin: auto;
-    text-align: center;
 }
 
 button {
-    background-color: #4A90E2;
-    color: white;
-    border: none;
     padding: 10px 20px;
     margin: 10px 10px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 1rem;
     border-radius: 5px;
+    border: 1px solid #ccc;
+    height: 3rem;
 }
 button:hover {
     opacity: 0.9;
 }
 select {
-    padding: 10px;
-    font-size: 16px;
-    margin: 10px;
+    padding: 10px 20px;
+    margin: 10px 10px;
+    font-size: 1rem;
     border-radius: 5px;
     border: 1px solid #ccc;
-}
+    cursor: pointer;
+    height: 3rem;
 
 
-.main-cloud {
-    position: absolute;
-    top: -30px;
-    left: -50px;
-    width: 200px; /* Justera storleken på molnet */
-    height: auto;
-    z-index: 0; /* Lägg molnet bakom texten */
-    opacity: 0.6; /* Gör molnet lite transparent */
-}
-  
-.sun { 
-    position: absolute;
-    z-index:0;
-    top:0;
-    left:0;
-    right:0;
-    bottom:0;
-    margin: auto;  
-    width:233px; /* 2/3 av 350px */
-    height:233px;
-    border-radius:50%;	
-    background:white;
-    opacity:2;			
-    box-shadow: 0px 0px 133px 50px white; /* Proportionellt minskad skugga */
-}
-  
-.ray_box {
-    position: absolute;
-    margin: auto;
-    top:0px;
-    left:0;
-    right:0;
-    bottom:0;	
-    width:233px;  /* Matcha solens nya storlek */
-    -webkit-animation: ray_anim 24s linear infinite; /* Behåll rotationshastigheten */
-    animation: ray_anim 24s linear infinite;
 }
 
-.ray {  
-    background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(237, 237, 134, 0.8) 50%, rgba(255,255,255,0) 100%);
-    background: linear-gradient(top, rgba(255,255,255,0) 0%, rgba(230, 238, 116, 0.8) 50%, rgba(255,255,255,0) 100%); 
-    margin-left:33px; /* Minskad marginal */
-    border-radius:80% 80% 0 0;
-    position:absolute;
-    opacity:0.1;
+.output p h2 {
+    color: white;
 }
-
-/* Justerade strålstorlekar och positionering */
-.ray1 {    
-    height:567px; /* 2/3 av 850px */
-    width:100px;  /* 2/3 av 150px */
-    -webkit-transform: rotate(180deg);
-    top:-583px;    /* 2/3 av -875px */
-    left: 50px;    /* 2/3 av 75px */
-}
-.ray2 {
-    height:333px; /* 2/3 av 500px */
-    width:27px;   /* 2/3 av 40px */
-    -webkit-transform: rotate(220deg);
-    top:-300px;    /* 2/3 av -450px */
-    left: 250px;   /* 2/3 av 375px */
-}
-.ray3 {
-    height:567px;
-    width:167px;
-    -webkit-transform: rotate(250deg);
-    top:-267px;
-    left: 333px;
-}
-.ray4 {
-    height:400px;
-    width:47px;
-    -webkit-transform: rotate(305deg);
-    top:100px;
-    left: 333px;
-}
-.ray5 {
-    height:467px;
-    width:100px;
-    -webkit-transform: rotate(-15deg);
-    top:200px;
-    left: 133px;
-}
-.ray6 {
-    height:300px;
-    width:167px;
-    -webkit-transform: rotate(30deg);
-    top:200px;
-    left: -133px;
-}
-.ray7 {
-    height:600px;
-    width:33px;
-    -webkit-transform: rotate(70deg);
-    top:-117px;
-    left: -133px;
-}
-.ray8 {
-    height:400px;
-    width:100px;
-    -webkit-transform: rotate(100deg);
-    top:-150px;
-    left:-300px;
-}
-.ray9 {
-    height:267px;
-    width:33px;
-    -webkit-transform: rotate(120deg);
-    top:-217px;
-    left:-200px;
-}
-.ray10 {
-    height:633px;
-    width:77px;
-    -webkit-transform: rotate(150deg);
-    top:-617px;
-    left: -200px;
-}
-
-  
-  /* Justerad animation för snabbare rotation */
-  @-webkit-keyframes ray_anim { 
-      0% { -webkit-transform: rotate(0deg); transform: rotate(0deg);}    
-      100% { -webkit-transform: rotate(360deg); transform: rotate(360deg);}
-  }
-  
-
-

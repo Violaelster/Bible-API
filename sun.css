@@ -1,0 +1,176 @@
+/* Bakgrundsanimation från https://codepen.io/DedaloD/pen/qBgmovJ */
+
+/* Deklarerar en Houdini-egenskap för blinkande opacitet */
+@property --blink-opacity {  
+    syntax: "<number>";           /* Tillåter numeriska värden */
+    inherits: false;              /* Ärvs inte av barn-element */
+    initial-value: 1;             /* Standardvärde: helt synligt */
+}
+
+
+/* Animation för att få ett element att blinka */
+@keyframes blink-animation {
+    0%, 100% {
+        opacity: var(--blink-opacity, 1); /* Hämtar Houdini-egenskapens värde */
+    }
+    50% {
+        opacity: 0; /* Halvvägs blir elementet osynligt */
+    }
+}
+
+/* Gör att sidans bakgrund flyter genom att animera positionen */
+@keyframes smoothBg {
+    from {
+        background-position: 50% 50%, 50% 50%; /* Startposition */
+    }
+    to {
+        background-position: 350% 50%, 350% 50%; /* Slutposition */
+    }
+}
+
+/* Wrapper-element som omsluter hero och content */
+.wrapper {
+    width: 100%; /* Fyller hela bredden */
+    height: auto;
+    position: relative; /* Placering för att möjliggöra absoluta barn */
+}
+
+/* Hero-sektionen för gradientbakgrund och animering */
+.hero {
+    width: 100%; /* Fyller bredden på wrapper */
+    height: 100%; 
+    min-height: 100vh; /* Täck hela höjden på viewporten */
+    position: relative;
+    display: flex; /* Centrerar innehållet */
+    place-content: center;
+    place-items: center;
+
+    /* Definierar två lager av gradienter */
+    --stripes: repeating-linear-gradient(
+        100deg, var(--stripe-color) 0%, 
+        var(--stripe-color) 7%, 
+        transparent 10%, 
+        transparent 12%, 
+        var(--stripe-color) 16%
+    );
+    --rainbow: repeating-linear-gradient(
+        100deg, #60a5fa 10%, 
+        #e879f9 15%, 
+        #60a5fa 20%, 
+        #5eead4 25%, 
+        #60a5fa 30%
+    );
+    background-image: var(--stripes), var(--rainbow); /* Använder de två gradienterna */
+    background-size: 300%, 200%; /* Gör gradienterna större för mjuka övergångar */
+    background-position: 50% 50%, 50% 50%; /* Startposition */
+
+    filter: blur(10px) invert(100%); /* Skapar en suddig, inverterad effekt */
+
+    /* Mask för att gradvis dölja gradienten */
+    mask-image: radial-gradient(ellipse at 100% 0%, black 40%, transparent 70%);
+}
+
+/* Efterliknar animationseffekt i bakgrunden */
+.hero::after {
+    content: ""; /* Tomt pseudo-element */
+    position: absolute;
+    inset: 0; /* Täck hela hero-elementet */
+    background-image: var(--stripes), var(--rainbow); /* Samma bakgrund */
+    background-size: 200%, 100%; /* Ändrad storlek för pseudo-element */
+    animation: smoothBg 60s linear infinite; /* Applicerar smoothBg-animationen */
+    background-attachment: fixed; /* Gör bakgrunden fixerad */
+    mix-blend-mode: difference; /* Skapar färgblandningseffekt */
+}
+
+/* När en checkbox är markerad ändras färger och filter */
+:has(:checked) {
+    --stripe-color: #000; /* Sätter streckfärgen till svart */
+}
+:has(:checked) .hero,
+:has(:checked) .hero::after {
+    filter: blur(10px) opacity(50%) saturate(200%); /* Ändrar filter */
+}
+
+/* Sektionen med innehåll */
+.content {
+    position: absolute;
+    inset: 0; /* Täck hela wrapper */
+    width: 100%;
+    height: 100%;
+    display: flex; /* Flex för centrering */
+    place-content: center;
+    place-items: center;
+    flex-flow: column; /* Staplar barn vertikalt */
+    gap: 4.5%; /* Mellanrum mellan element */
+    text-align: center; /* Centrerad text */
+    mix-blend-mode: difference; /* Kontrasterande blandning */
+    filter: invert(1); /* Inverterar färger */
+}
+
+/* Skalande rubrik som justeras efter skärmstorlek */
+.h1--scalingSize {
+    font-size: calc(1rem - -5vw); /* Dynamisk storlek baserat på viewport */
+   /*  position: relative; */
+}
+
+/* Osynlig checkbox för att styra bakgrundsfärg */
+#switch {
+    appearance: none; /* Tar bort standardutseende */
+    opacity: 0; /* Gör checkboxen osynlig */
+}
+
+/* Stilar för etiketten till switchen */
+[for="switch"] {
+    cursor: pointer; /* Muspekare visar att det är klickbart */
+    transition: 0.15s linear; /* Smidig övergång vid interaktion */
+    will-change: transform, font-weight; /* Optimering */
+    padding: 0.5rem;
+}
+
+/* Interaktiv stil när etiketten hovras eller aktiveras */
+[for="switch"]:where(:hover, :active, :focus-within) {
+    transition: 0.3s ease; /* Smidigare övergång */
+    animation: animSwitch 0.2s alternate; /* Enkel animation vid interaktion */
+}
+
+/* Animation för etikettens interaktivitet */
+@keyframes animSwitch {
+    50% {
+        transform: scale(1.2); /* Gör den större tillfälligt */
+        font-weight: 900; /* Fetare text */
+    }
+}
+
+/* Ikon i etiketten */
+.icon {
+    width: 1lh; /* Höjden baseras på linjehöjden */
+    height: 1lh;
+    aspect-ratio: 1/1; /* Gör ikonen kvadratisk */
+    padding: 0.25em 0.35rem;
+    border-radius: calc(1px / 0); /* Rundade hörn */
+    border: 1px dashed; /* Streckad ram */
+    --blink-opacity: 1; /* Sätter blinkande opacitet */
+    animation: blink-animation 2s ease-in-out infinite running; /* Blinkar kontinuerligt */
+}
+
+/* Specialeffekt för rubriken */
+.h1--scalingSize::before {
+    content: attr(data-text); /* Visar attributets text */
+    position: absolute;
+    inset: 0; /* Fyller hela rubriken */
+    background: white; /* Bakgrundsfärg */
+    text-shadow: 0 0 1px #ffffff; /* Skapar en glödande effekt */
+    background-clip: text; /* Klipper bakgrund till texten */
+    -webkit-text-fill-color: transparent; /* Transparent textfyllnad */
+    backdrop-filter: blur(19px) brightness(12.5); /* Suddig och ljusare effekt */
+    display: flex; /* Flexlayout för justering */
+    margin: auto;
+    z-index: 1; /* Placera ovanpå */
+    pointer-events: none; /* Gör den inte interaktiv */
+}
+
+
+
+
+
+  
