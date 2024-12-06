@@ -27,6 +27,23 @@
         --stripe-color: #fff;
         --bg: var(--stripe-color);
         --maincolor: var(--bg);
+
+    /* Definierar två lager av gradienter */
+    --stripes: repeating-linear-gradient(
+        100deg, var(--stripe-color) 0%, 
+        var(--stripe-color) 7%, 
+        transparent 10%, 
+        transparent 12%, 
+        var(--stripe-color) 16%
+    );
+    --rainbow: repeating-linear-gradient(
+        100deg, 
+        #fffacd 10%, /* Ljusgult (likt solstrålar) */
+        #ffe4b5 15%, /* Ljus orange/beige */
+        #fffacd 20%, /* Ljusgult */
+        #ffd700 25%, /* Guld */
+        #fffacd 30%  /* Ljusgult igen */
+    );
      
 }
 
