@@ -1,45 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bible Verse Generator</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="variables.css">
-    <link rel="stylesheet" href="bg.css">
-    <link rel="stylesheet" href="jesusImages.css">
-</head>
-<body>
-
-  <section class='wrapper'>
-
-    <!-- Background -->
-    <div class='hero'></div>
-      <div class='content'>
-        <h1 class='h1--scalingSize' data-text='Bible Verse Generator'>Bible Verse Generator</h1>
-
-        <!-- Text -->
+    <link rel="stylesheet" href="/CSS/style.css" />
+    <link rel="stylesheet" href="/CSS/variables.css" />
+    <link rel="stylesheet" href="/CSS/jesusImages.css" />
+  </head>
+  <body>
+    <!-- All content -->
+    <section class="wrapper">
+      <!-- Background Design -->
+      <div class="hero"></div>
+      <div class="content">
+        <h1 class="h1" data-text="Bible Verse Generator">
+          Bible Verse Generator
+        </h1>
+        <!-- Verse-generator -->
         <div class="generator">
           <select id="translation">
-              <option value="web">World English Bible</option>
-              <option value="kjv">King James Version</option>
-              <option value="bbe">Bible in Basic English</option>
+            <option value="web">World English Bible</option>
+            <option value="kjv">King James Version</option>
+            <option value="bbe">Bible in Basic English</option>
           </select>
           <button id="random-verse">Generate Random Verse</button>
           <div id="output"></div>
+          <!-- Text be changed by h2 and p -->
         </div>
-          
         <!-- Image -->
         <div id="imageWrapper">
           <img id="image" src="" alt="Heavenly Image" />
         </div>
         <button id="imageButton">Change Image</button>
       </div>
-      
-  </section>
-     
-    
+    </section>
     <script src="script.js"></script>
     <script src="jesusImages.js"></script>
-</body>
+  </body>
 </html>

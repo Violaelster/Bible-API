@@ -1,0 +1,113 @@
+/* #region GENERAL STYLES */
+
+* {
+  font-family: var(--font-family);
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  cursor: url("SVG/cross.svg") 16 16, auto;
+  margin: 0;
+}
+
+/* #endregion */
+
+/* #region HERO W BACKGROUND ANIMATION */
+.hero {
+  min-height: 100vh;
+  background-image: var(--stripes), var(--rainbow); /* Använder de två gradienterna */
+  background-size: 300%, 200%; /* Gör gradienterna större för mjuka övergångar */
+  background-position: 50% 50%, 50% 50%; /* Startposition */
+  filter: invert(100%); /* invert(100%) */
+  mask-image: radial-gradient(ellipse at 100% 0%, #f4efef 70%, #000000b3 90%);
+}
+
+/* Efterliknar animationseffekt i bakgrunden */
+.hero::after {
+  content: ""; /* Tomt pseudo-element */
+  position: absolute;
+  inset: 0; /* Täck hela hero-elementet */
+  background-image: var(--stripes), var(--rainbow); /* Samma bakgrund */
+  background-size: 200%, 100%; /* Ändrad storlek för pseudo-element */
+  animation: smoothBg 60s linear infinite; /* Applicerar smoothBg-animationen */
+  background-attachment: fixed; /* Gör bakgrunden fixerad */
+}
+
+/* Gör att sidans bakgrund flyter genom att animera positionen */
+@keyframes smoothBg {
+  from {
+    background-position: 50% 50%, 50% 50%; /* Startposition */
+  }
+  to {
+    background-position: 350% 50%, 350% 50%; /* Slutposition */
+  }
+}
+
+/* #endregion */
+
+/* #region CONTENT & VERSE-GENERATOR */
+.content {
+  position: absolute;
+  inset: 0; /* Täck hela wrapper */
+  width: 100%;
+  height: 100%;
+  display: flex; /* Flex för centrering */
+  place-content: center;
+  place-items: center;
+  flex-flow: column; /* Staplar barn vertikalt */
+  text-align: center; /* Centrerad text */
+  mix-blend-mode: difference; /* Skapar effekt på text*/
+}
+
+.generator {
+  /* Verse-generator */
+  max-width: 80%; /* Limits content-width to center */
+}
+/* #endregion */
+
+/* #region BUTTON & LANGUAGE DROPDOWN */
+button,
+select {
+  padding: var(--button-padding);
+  margin: var(--button-margin);
+  font-size: var(--button-fontsize);
+  min-height: 3rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  font-weight: var(--button-fontweight);
+}
+
+button:hover,
+select:hover {
+  opacity: 0.9; /* Subtle hover effect */
+}
+
+/* #endregion */
+
+/* #region FONTS */
+h1 {
+  /* Scaling texts depending on screen width */
+  font-size: var(--text-size-h1);
+  color: var(--text-color);
+  background: none;
+  margin: 0;
+}
+
+h2 {
+  /* Scaling texts depending on screen width */
+  color: var(--text-color);
+  font-size: var(--text-size-h2);
+  margin: 0;
+}
+
+p {
+  /* Scaling texts depending on screen width */
+  color: var(--text-color);
+  font-size: var(--text-size-p);
+}
+
+/* #endregion */
