@@ -9,66 +9,73 @@ html {
 }
 
 body {
-  cursor: url("SVG/cross.svg") 16 16, auto;
+  cursor: url("/SVG/cross.svg") 16 16, auto;
   margin: 0;
 }
 
 /* #endregion */
 
 /* #region HERO W BACKGROUND ANIMATION */
+
 .hero {
   min-height: 100vh;
-  background-image: var(--stripes), var(--rainbow); /* Använder de två gradienterna */
-  background-size: 300%, 200%; /* Gör gradienterna större för mjuka övergångar */
-  background-position: 50% 50%, 50% 50%; /* Startposition */
-  filter: invert(100%); /* invert(100%) */
-  mask-image: radial-gradient(ellipse at 100% 0%, #f4efef 70%, #000000b3 90%);
+  background-image: var(--stripes), var(--rainbow); /* Two gradient layers */
+  filter: invert(100%); /* Inverts the colors of the background */
+  mask-image: radial-gradient(
+    ellipse at 100% 0%,
+    #f4efef 70%,
+    #000000b3 90%
+  ); /* Creates a white round shadow in left bottom corner */
 }
 
-/* Efterliknar animationseffekt i bakgrunden */
+/* Pseudo-element to mimic an animation effect in the background */
 .hero::after {
-  content: ""; /* Tomt pseudo-element */
-  position: absolute;
-  inset: 0; /* Täck hela hero-elementet */
-  background-image: var(--stripes), var(--rainbow); /* Samma bakgrund */
-  background-size: 200%, 100%; /* Ändrad storlek för pseudo-element */
-  animation: smoothBg 60s linear infinite; /* Applicerar smoothBg-animationen */
-  background-attachment: fixed; /* Gör bakgrunden fixerad */
+  content: ""; /* Empty pseudo-element for decorative purposes */
+  position: absolute; /* Positions the pseudo-element relative to the hero section */
+  inset: 0; /* Makes the pseudo-element cover the entire hero */
+  background-image: var(--stripes), var(--rainbow); /* Reuses the gradient background layers */
+  background-size: 200%, 100%; /* Enlarges the first background for smooth animation */
+  animation: smoothBg 50s linear infinite; /* Animates the background movement over 60 seconds */
+  background-attachment: fixed;
 }
 
-/* Gör att sidans bakgrund flyter genom att animera positionen */
+/* Animates the background movement to create a flowing effect */
 @keyframes smoothBg {
   from {
-    background-position: 50% 50%, 50% 50%; /* Startposition */
+    background-position: 50% 50%, 50% 50%; /* Starts in the center */
   }
   to {
-    background-position: 350% 50%, 350% 50%; /* Slutposition */
+    background-position: 350% 50%, 350% 50%; /* Moves horizontally to the right */
   }
 }
 
 /* #endregion */
 
 /* #region CONTENT & VERSE-GENERATOR */
+
 .content {
-  position: absolute;
-  inset: 0; /* Täck hela wrapper */
+  position: absolute; /* Positions the content absolutely within its parent */
+  inset: 0; /* Stretches the content to fill its parent */
   width: 100%;
   height: 100%;
-  display: flex; /* Flex för centrering */
+  display: flex;
   place-content: center;
   place-items: center;
-  flex-flow: column; /* Staplar barn vertikalt */
-  text-align: center; /* Centrerad text */
-  mix-blend-mode: difference; /* Skapar effekt på text*/
+  flex-flow: column;
+  text-align: center;
+  mix-blend-mode: difference; /* Creates a visual blending effect for the text */
 }
 
 .generator {
-  /* Verse-generator */
-  max-width: 80%; /* Limits content-width to center */
+  /* Container for the verse generator */
+
+  max-width: 80%; /* Limits the width to keep content centered */
 }
+
 /* #endregion */
 
 /* #region BUTTON & LANGUAGE DROPDOWN */
+
 button,
 select {
   padding: var(--button-padding);
@@ -76,14 +83,53 @@ select {
   font-size: var(--button-fontsize);
   min-height: 3rem;
   border-radius: 5px;
-  border: 1px solid #ccc;
+  border: 1px solid #ccc; /* Adds a subtle border */
   cursor: pointer;
   font-weight: var(--button-fontweight);
 }
 
 button:hover,
 select:hover {
-  opacity: 0.9; /* Subtle hover effect */
+  opacity: 0.9; /* Adds a subtle hover effect */
+}
+
+@media only screen and (max-width: 660px) {
+  button,
+  select {
+    margin: 0.3rem;
+  }
+}
+
+/* #endregion */
+
+/* #region JESUS IMAGES */
+
+#imageWrapper {
+  width: 25vw;
+  height: 25vw;
+  min-height: 13rem; /* Ensures a minimum size for smaller viewports */
+  min-width: 13rem;
+  border-radius: 50%;
+  overflow: hidden; /* Ensures the image stays within the circular wrapper */
+  animation: glow 3s infinite alternate; /* Adds a glowing animation to the wrapper */
+  margin: 1.5rem;
+}
+
+#image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the image is cropped correctly within the wrapper */
+  transition: opacity 1s ease-in-out; /* Smoothly fades in/out when the image changes */
+}
+
+/* Animates a glowing effect around the image wrapper */
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5); /* Starts with a faint glow */
+  }
+  100% {
+    box-shadow: 0 0 50px rgba(255, 255, 255, 1); /* Ends with a bright glow */
+  }
 }
 
 /* #endregion */
@@ -95,6 +141,13 @@ h1 {
   color: var(--text-color);
   background: none;
   margin: 0;
+}
+
+/* Make more space from other content when screen is smaller */
+@media only screen and (max-width: 660px) {
+  h1 {
+    margin-bottom: 2rem;
+  }
 }
 
 h2 {
@@ -109,5 +162,4 @@ p {
   color: var(--text-color);
   font-size: var(--text-size-p);
 }
-
 /* #endregion */

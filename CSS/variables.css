@@ -2,7 +2,7 @@
   /* Text Properties */
   --text-size-h1: calc(1rem + 5vw);
   --text-size-h2: calc(0.75rem + 2vw);
-  --text-size-p: calc(0.5rem + 1rem);
+  --text-size-p: calc(0.5rem + 1vw);
   --text-color: #ffffff;
   --font-family: "Luminari", serif;
 
@@ -12,8 +12,8 @@
   --button-fontsize: 1rem;
 
   /* Background */
-  --stripe-color: white;
-  --background-color: #ffe4b5;
+  --stripe-color: #f8f8f4;
+  --background-color: #090e73;
 
   /* Defines two layers of gradients for background */
   --stripes: repeating-linear-gradient(
@@ -24,6 +24,8 @@
     transparent 12%,
     var(--stripe-color) 16%
   );
+
+  /* Inverted colors */
   --rainbow: repeating-linear-gradient(
     100deg,
     #fffacd 10%,
