@@ -9,7 +9,7 @@ html {
 }
 
 body {
-  cursor: url("/SVG/cross.svg") 16 16, auto;
+  cursor: url("SVG/cross.svg") 16 16, auto;
   margin: 0;
 }
 
